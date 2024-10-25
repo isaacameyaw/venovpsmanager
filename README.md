@@ -1,4 +1,4 @@
-## ◇────── DRAGON VPS MANAGER v2 ───────◇
+## ◇────── VENO VPS MANAGER v2 ───────◇
 
 ㅤ
 
