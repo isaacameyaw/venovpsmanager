@@ -62,7 +62,7 @@ fun_tst () {
 speedtest --share > speed
 }
 echo ""
-echo -e "   \033[1;32mㅤㅤTESTING SERVER SPEEDㅤㅤ\033[0m"
+echo -e "   \033[1;32mㅤ🪐ㅤTESTING SERVER SPEEDㅤ🪐ㅤ\033[0m"
 echo ""
 aguarde 'fun_tst'
 echo ""
@@ -178,7 +178,7 @@ _userexp=$(printf '%-5s' "$_expuser")
 _tuser=$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)
 clear
 echo -e "\033[0;34m◇───────────────────────────────────────────────◇\033[0m"
-echo -e "\E[41;1;37m           •ㅤㅤVENO VPS MANAGERㅤㅤ•        \E[0m"
+echo -e "\E[44;1;37m           •ㅤ🪐ㅤVENO-VPS-MANAGERㅤ🪐ㅤ•        \E[0m"
 echo -e "\033[0;34m◇───────────────────────────────────────────────◇\033[0m"
 echo -e "\033[1;32m◇ㅤSYSTEM          ◇ㅤRAM MEMORY    ◇ㅤPROCESSOR"
 echo -e "\033[1;31mOS: \033[1;37m$_system \033[1;31mTotal:\033[1;37m$_ram \033[1;31mCPU cores: \033[1;37m$_core\033[0m"
@@ -291,7 +291,7 @@ _userexp=$(printf '%-5s' "$_expuser")
 _tuser=$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)
 clear
 echo -e "\033[0;34m◇───────────────────────────────────────────────◇\033[0m"
-echo -e "\E[41;1;37m           •ㅤㅤVENO VPS MANAGERㅤㅤ•        \E[0m"
+echo -e "\E[44;1;37m           •ㅤ🪐ㅤVENO-VPS-MANAGERㅤ🪐ㅤ•        \E[0m"
 echo -e "\033[0;34m◇───────────────────────────────────────────────◇\033[0m"
 echo -e "\033[1;32m◇ㅤSYSTEM          ◇ㅤRAM MEMORY    ◇ㅤPROCESSOR "
 echo -e "\033[1;31mOS: \033[1;37m$_system \033[1;31mTotal:\033[1;37m$_ram \033[1;31mCPU cores: \033[1;37m$_core\033[0m"
@@ -363,8 +363,8 @@ case "$x" in
    echo -ne "\n\033[1;31m◇ ENTER \033[1;33mto return to \033[1;32mMENU!\033[0m"; read
    ;;
    10)
+   clear
    conexao
-   exit;
    ;;
    11)
    clear

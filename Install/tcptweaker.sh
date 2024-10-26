@@ -1,57 +1,57 @@
 #!/bin/bash
-
-# Function to prompt yes/no questions
-prompt_yes_no() {
-    read -p "$1 [y/n]: " -e -i n response
-    echo "$response"
-}
-
-# Function to add TCP Tweaker network settings
-add_tcp_tweaker_settings() {
-    cat << EOF >> /etc/sysctl.conf
-
-# TCP Tweaker 1.0
+tput setaf 7 ; tput setab 4 ; tput bold ; printf '%35s%s%-20s\n' "TCP Tweaker 1.0" ; tput sgr0
+if [[ `grep -c "^#PH56" /etc/sysctl.conf` -eq 1 ]]
+then
+	echo ""
+	echo "TCP Tweaker network settings have already been added to the system!"
+	echo ""
+	read -p "Do you want to remove TCP Tweaker settings? [s/n]: " -e -i n resposta0
+	if [[ "$resposta0" = 's' ]]; then
+		grep -v "^#PH56
 net.ipv4.tcp_window_scaling = 1
 net.core.rmem_max = 16777216
 net.core.wmem_max = 16777216
 net.ipv4.tcp_rmem = 4096 87380 16777216
 net.ipv4.tcp_wmem = 4096 16384 16777216
 net.ipv4.tcp_low_latency = 1
-net.ipv4.tcp_slow_start_after_idle = 0
-EOF
-    sysctl -p /etc/sysctl.conf
-}
-
-# Check if TCP Tweaker settings are already added
-if grep -q "# TCP Tweaker 1.0" /etc/sysctl.conf; then
-    echo ""
-    echo "TCP Tweaker network settings have already been added to the system!"
-    echo ""
-    response0=$(prompt_yes_no "Do you want to remove TCP Tweaker settings?")
-    if [[ "$response0" = 'y' ]]; then
-        sed -i '/# TCP Tweaker 1.0/,/^net.ipv4.tcp_slow_start_after_idle = 0$/d' /etc/sysctl.conf
-        sysctl -p /etc/sysctl.conf > /dev/null
-        echo ""
-        echo "TCP Tweaker network settings were successfully removed."
-        echo ""
-    else
-        echo ""
-    fi
+net.ipv4.tcp_slow_start_after_idle = 0" /etc/sysctl.conf > /tmp/syscl && mv /tmp/syscl /etc/sysctl.conf
+sysctl -p /etc/sysctl.conf > /dev/null
+		echo ""
+		echo "TCP Tweaker network settings were successfully removed."
+		echo ""
+	exit
+	else 
+		echo ""
+		exit
+	fi
 else
-    echo ""
-    echo "This is an experimental script. Use at your own risk!"
-    echo "This script will change some network settings to reduce latency and improve speed."
-    echo ""
-    response=$(prompt_yes_no "Proceed with installation?")
-    if [[ "$response" = 'y' ]]; then
-        add_tcp_tweaker_settings
-        echo ""
-        echo "TCP Tweaker network settings have been added successfully."
-        echo ""
-    else
-        echo ""
-        echo "Installation was canceled by the user!"
-        echo ""
-    fi
+	echo ""
+	echo "This is an experimental script. Use at your own risk!"
+	echo "This script will change some network settings"
+	echo "to reduce latency and improve speed."
+	echo ""
+	read -p "Proceed with installation? [s/n]: " -e -i n resposta
+	if [[ "$resposta" = 's' ]]; then
+	echo ""
+	echo "Modifying the following settings:"
+	echo " " >> /etc/sysctl.conf
+	echo "#PH56" >> /etc/sysctl.conf
+echo "net.ipv4.tcp_window_scaling = 1
+net.core.rmem_max = 16777216
+net.core.wmem_max = 16777216
+net.ipv4.tcp_rmem = 4096 87380 16777216
+net.ipv4.tcp_wmem = 4096 16384 16777216
+net.ipv4.tcp_low_latency = 1
+net.ipv4.tcp_slow_start_after_idle = 0" >> /etc/sysctl.conf
+echo ""
+sysctl -p /etc/sysctl.conf
+		echo ""
+		echo "TCP Tweaker network settings have been added successfully."
+		echo ""
+	else
+		echo ""
+		echo "Installation was canceled by the user!"
+		echo ""
+	fi
 fi
 exit

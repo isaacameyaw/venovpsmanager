@@ -2,7 +2,7 @@
 clear
 IP=$(wget -qO- ipv4.icanhazip.com)
 arq="/etc/Plus-torrent"
-echo -e "\E[44;1;37m        ㅤㅤTORRENT BLOCK FIREWALLㅤㅤ        \E[0m"
+echo -e "\E[44;1;37m        ㅤ🌍ㅤTORRENT BLOCK FIREWALLㅤ🌍ㅤ        \E[0m"
 echo ""
 if [[ -e "$arq" ]]; then
 	fun_fireoff () {
